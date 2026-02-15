@@ -5,62 +5,552 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privatlivspolitik - Worksnap</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        h1 { color: #000; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        h2 { color: #2c3e50; margin-top: 30px; }
-        p { margin-bottom: 15px; }
-        .highlight { background-color: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; margin: 20px 0; }
-        footer { margin-top: 50px; font-size: 0.9em; color: #777; border-top: 1px solid #eee; padding-top: 20px; }
-        ul { margin-bottom: 15px; }
-        li { margin-bottom: 5px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .updated {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border-left: 4px solid #2196F3;
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            color: #2196F3;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .toc a:hover {
+            color: #2196F3;
+            padding-left: 10px;
+        }
+
+        h2 {
+            color: #2196F3;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #1976D2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        h4 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .contact-card h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .contact-card p {
+            color: white;
+            margin: 10px 0;
+        }
+
+        .contact-card a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
+        .summary h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            margin-top: 0;
+        }
+
+        .summary ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .summary li {
+            color: white;
+            padding: 8px 0;
+            font-size: 1.05em;
+        }
+
+        .summary li:before {
+            content: "✅ ";
+            margin-right: 10px;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            color: #777;
+        }
+
+        a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .contact-card, .summary {
+                padding: 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            .header {
+                background: #2196F3;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Privatlivspolitik for Worksnap</h1>
-    <p>Sidst opdateret: 12. februar 2026</p>
+    <div class="container">
+        <div class="header">
+            <h1>Privatlivspolitik for Worksnap</h1>
+            <p class="subtitle">Dit privatliv er i sikre hænder</p>
+            <div class="updated">Sidst opdateret: 12. februar 2026</div>
+        </div>
 
-    <div class="highlight">
-        <strong>Kort fortalt:</strong> Worksnap prioriterer dit privatliv. Dine billeder og projektdata gemmes udelukkende lokalt på din enhed. Vi bruger kun en sikker cloud-tjeneste (Supabase) til at verificere virksomhedslicenser, hvis du vælger at bruge en sådan. Appen indeholder også en valgfri backup-funktion til din egen Google Drive.
+        <div class="content">
+            <div class="toc">
+                <h2>📋 Indholdsfortegnelse</h2>
+                <ul>
+                    <li><a href="#introduktion">Introduktion</a></li>
+                    <li><a href="#app-ejer">App-ejer</a></li>
+                    <li><a href="#data">Hvilke data indsamler vi?</a></li>
+                    <li><a href="#lokal">Lokal datalagring</a></li>
+                    <li><a href="#licens">Licensverificering</a></li>
+                    <li><a href="#backup">Valgfri Cloud-backup</a></li>
+                    <li><a href="#gdpr">GDPR Compliance</a></li>
+                    <li><a href="#sikkerhed">Databeskyttelse og Sikkerhed</a></li>
+                    <li><a href="#tilladelser">Enhedstilladelser</a></li>
+                    <li><a href="#born">Børns Privatliv</a></li>
+                    <li><a href="#international">International Data Overførsel</a></li>
+                    <li><a href="#aendringer">Ændringer til denne Politik</a></li>
+                    <li><a href="#kontakt">Kontakt Os</a></li>
+                </ul>
+            </div>
+
+            <section id="introduktion">
+                <h2>🌟 Introduktion</h2>
+                <p>Velkommen til Worksnap - din lokale partner for professionel billeddokumentation. Vi bygger appen på princippet om "Privacy by Design", hvilket betyder, at dit privatliv er kernen i alt, hvad vi gør.</p>
+                <p>Denne privatlivspolitik forklarer tydeligt og gennemsigtigt, hvordan vi håndterer dine data.</p>
+            </section>
+
+            <section id="app-ejer">
+                <h2>👤 App-ejer</h2>
+                <div class="info-box">
+                    <p><strong>App navn:</strong> Worksnap</p>
+                    <p><strong>Udvikler:</strong> Nicki Andersen</p>
+                    <p><strong>Kontakt email:</strong> <a href="mailto:Nicki.Andersen@gmail.com">Nicki.Andersen@gmail.com</a></p>
+                    <p><strong>Land:</strong> Danmark</p>
+                </div>
+            </section>
+
+            <section id="data">
+                <h2>📊 Hvilke data indsamler vi?</h2>
+
+                <h3>1. Data vi IKKE indsamler</h3>
+                <div class="success-box">
+                    <p>Worksnap indsamler <strong>ikke</strong>:</p>
+                    <ul>
+                        <li>Personligt identificerbare oplysninger (bortset fra det navn du frivilligt indtaster)</li>
+                        <li>Din præcise placering eller GPS-koordinater</li>
+                        <li>Kontakter eller kalendere</li>
+                        <li>Adgang til andre apps' data</li>
+                        <li>Browsing-historik eller app-brug uden for Worksnap</li>
+                        <li>Mikrofon-optagelser (selvom kamera-tilladelse er påkrævet)</li>
+                    </ul>
+                </div>
+
+                <h3>2. Data vi gemmer lokalt på din enhed</h3>
+                <p>Følgende data gemmes <strong>kun lokalt</strong> i appens private lager og sendes aldrig automatisk til eksterne servere:</p>
+                <ul>
+                    <li><strong>Billeder:</strong> Alle arbejdsbilleder taget med appen</li>
+                    <li><strong>Projektdata:</strong> Projektnavne, tags (mærkater), kommentarer</li>
+                    <li><strong>Dit navn:</strong> Hvis du vælger at indtaste det (bruges til at identificere dine rapporter)</li>
+                    <li><strong>App-indstillinger:</strong> Tema, sletningsintervaller, notifikationer</li>
+                </ul>
+
+                <div class="info-box">
+                    <p><strong>Vigtigt:</strong> Dine billeder forlader kun din enhed, hvis du aktivt vælger at:</p>
+                    <ul>
+                        <li>Eksportere dem som PDF eller ZIP og dele via din telefons dele-menu</li>
+                        <li>Aktivere den valgfrie Google Drive backup</li>
+                    </ul>
+                    <p>Vi har <strong>aldrig</strong> automatisk adgang til dine billeder eller projekter.</p>
+                </div>
+            </section>
+
+            <section id="lokal">
+                <h2>📱 Lokal Datalagring (Billeder og Projekter)</h2>
+                <p>Worksnap er designet som en offline-first app, hvilket betyder:</p>
+                <ul>
+                    <li>Alle billeder gemmes i appens private mappe på din telefon</li>
+                    <li>Projektdata gemmes i en lokal database (Hive)</li>
+                    <li>Der kræves ingen internetforbindelse for at bruge appen</li>
+                    <li>Vi har ingen servere, der gemmer dine arbejdsbilleder</li>
+                </ul>
+
+                <div class="success-box">
+                    <p><strong>Privacy by Design:</strong> Dine arbejdsbilleder blandes aldrig med dine private fotos. De ligger i appens egen isolerede mappe, adskilt fra dit normale fotogalleri.</p>
+                </div>
+            </section>
+
+            <section id="licens">
+                <h2>🔑 Licensverificering (Supabase)</h2>
+                <p>Hvis din arbejdsgiver har købt Worksnap til virksomheden, og du indtaster en virksomhedskode, kommunikerer appen med vores backend hos Supabase for at verificere koden.</p>
+
+                <h3>Hvilke data sendes til Supabase?</h3>
+                <div class="info-box">
+                    <ul>
+                        <li><strong>Licenskode:</strong> Den kode du indtaster (f.eks. "WRKSNAP-XXXX-XXXX")</li>
+                        <li><strong>Enheds-identifikation:</strong> Et unikt ID fra din enhed for at sikre, at licensen bruges korrekt</li>
+                    </ul>
+                    <p><strong>Vigtigt:</strong> Denne data kobles <strong>ikke</strong> til dine billeder, projekter eller kommentarer. Den bruges udelukkende til at validere, at din virksomhedskode er gyldig.</p>
+                </div>
+
+                <h3>Hvorfor bruger vi Supabase?</h3>
+                <p>Supabase er en sikker cloud-platform, der håndterer autentificering og validering af virksomhedslicenser. Dette giver os mulighed for at:</p>
+                <ul>
+                    <li>Sikre, at kun gyldige licenser kan aktiveres</li>
+                    <li>Administrere udløbsdatoer og licens-låsning for virksomheder</li>
+                    <li>Forhindre misbrug af licenskoder</li>
+                </ul>
+
+                <p><strong>Supabase privatlivspolitik:</strong> <a href="https://supabase.com/privacy" target="_blank">https://supabase.com/privacy</a></p>
+            </section>
+
+            <section id="backup">
+                <h2>☁️ Valgfri Cloud-backup (Google Drive)</h2>
+                <p>Worksnap indeholder en valgfri funktion til at sikkerhedskopiere dine data til din egen Google Drive-konto. Denne funktion er <strong>slået fra som standard</strong>.</p>
+
+                <div class="warning-box">
+                    <p><strong>Hvad sker der, hvis du aktiverer Google Drive backup?</strong></p>
+                    <ul>
+                        <li><strong>Autentificering:</strong> Du logger ind direkte hos Google via OAuth. Vi ser eller gemmer aldrig din adgangskode.</li>
+                        <li><strong>Dataoverførsel:</strong> Dine billeder og projektdata uploades fra din enhed direkte til din egen Google Drive.</li>
+                        <li><strong>Mappe-struktur:</strong> Data organiseres i mapper: <code>Worksnap/{Projektnavn}/{Dato}/{Billede}</code></li>
+                        <li><strong>Kontrol:</strong> Du kan til enhver tid slette backup-data direkte i din Google Drive eller logge ud af appen.</li>
+                    </ul>
+                </div>
+
+                <p><strong>Google's privatlivspolitik:</strong> <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></p>
+            </section>
+
+            <section id="gdpr">
+                <h2>🇪🇺 GDPR Compliance (EU)</h2>
+                <p>Worksnap overholder EU's Databeskyttelsesforordning (GDPR):</p>
+
+                <h3>Dine rettigheder:</h3>
+                <ul>
+                    <li><strong>Ret til information:</strong> Denne privatlivspolitik</li>
+                    <li><strong>Ret til adgang:</strong> Kontakt os for at få info om eventuelle data hos os (begrænset til licenskoder)</li>
+                    <li><strong>Ret til sletning:</strong> Afinstallér appen for at slette lokale data. Kontakt os for at slette licens-data.</li>
+                    <li><strong>Ret til dataportabilitet:</strong> Eksporter dine projekter som PDF eller ZIP når som helst</li>
+                    <li><strong>Ret til indsigelse:</strong> Du kan til enhver tid afvise databehandling ved at fjerne virksomhedslicensen eller afinstallere appen</li>
+                </ul>
+
+                <h3>Lovligt grundlag for databehandling:</h3>
+                <ul>
+                    <li><strong>Legitim interesse:</strong> Håndtering af virksomhedslicenser for at levere premium-funktioner</li>
+                    <li><strong>Samtykke:</strong> Valgfri Google Drive backup kræver dit eksplicitte samtykke (via Google OAuth)</li>
+                </ul>
+            </section>
+
+            <section id="sikkerhed">
+                <h2>🔒 Databeskyttelse og Sikkerhed</h2>
+                <p>Vi tager datasikkerhed meget alvorligt:</p>
+                <ul>
+                    <li><strong>Lokal kryptering:</strong> All lokal data er beskyttet af Android's app sandbox og enhedskryptering</li>
+                    <li><strong>HTTPS:</strong> Al kommunikation med Supabase sker via krypterede forbindelser</li>
+                    <li><strong>Ingen automatisk upload:</strong> Dine billeder sendes aldrig automatisk uden din tilladelse</li>
+                    <li><strong>Ingen tredjeparts-tracking:</strong> Der er ingen analytics-værktøjer eller reklame-trackere i appen</li>
+                </ul>
+
+                <div class="success-box">
+                    <p><strong>Forskel mellem arbejds- og privatbilleder:</strong> Worksnap adskiller dine arbejdsbilleder fra din private telefons fotogalleri. Det sikrer, at dokumentation og privatliv holdes adskilt.</p>
+                </div>
+            </section>
+
+            <section id="tilladelser">
+                <h2>🔐 Enhedstilladelser</h2>
+                <p>For at fungere korrekt beder Worksnap om følgende tilladelser:</p>
+
+                <h3>Kamera</h3>
+                <p><strong>Hvorfor:</strong> Til at tage arbejdsbilleder direkte i appen.</p>
+                <p><strong>Bruges til:</strong> Dokumentation af arbejdsopgaver.</p>
+
+                <h3>Lager (Storage)</h3>
+                <p><strong>Hvorfor:</strong> Til at gemme dine projekter og billeder lokalt.</p>
+                <p><strong>Bruges til:</strong> Lokal lagring af billeder, generering af PDF/ZIP rapporter.</p>
+
+                <h3>Internet</h3>
+                <p><strong>Hvorfor:</strong> Bruges kun til verificering af virksomhedslicenser og valgfri cloud-backup.</p>
+                <p><strong>Bruges ikke til:</strong> Tracking, reklamer eller automatisk upload af billeder.</p>
+            </section>
+
+            <section id="born">
+                <h2>👶 Børns Privatliv</h2>
+                <p>Worksnap er primært rettet mod professionelle håndværkere og virksomheder. Appen indsamler ikke bevidst data fra børn under 13 år.</p>
+
+                <div class="warning-box">
+                    <p>Hvis du er forælder og opdager, at dit barn har brugt appen og indtastet personlige oplysninger, kontakt os venligst, så vi kan hjælpe med at fjerne dataen (selvom al data er lokal på enheden).</p>
+                </div>
+            </section>
+
+            <section id="international">
+                <h2>🌍 International Data Overførsel</h2>
+                <p>Data behandlet af Supabase (licenskoder) kan overføres og opbevares på servere uden for EU/EØS.</p>
+                
+                <p>Supabase overholder:</p>
+                <ul>
+                    <li>EU-US Data Privacy Framework</li>
+                    <li>Standard kontraktklausuler (SCCs)</li>
+                    <li>Relevante databeskyttelseslove (GDPR)</li>
+                </ul>
+
+                <p>Hvis du bruger Google Drive backup, gælder <a href="https://policies.google.com/privacy" target="_blank">Google's privatlivspolitik</a> for dataoverførsel.</p>
+            </section>
+
+            <section id="aendringer">
+                <h2>📝 Ændringer til denne Politik</h2>
+                <p>Vi kan opdatere denne privatlivspolitik fra tid til anden. Ændringer vil:</p>
+                <ul>
+                    <li>Blive postet på denne side med ny dato</li>
+                    <li>Vises i app-opdateringsbeskrivelsen</li>
+                    <li>Få effekt umiddelbart efter publicering</li>
+                </ul>
+
+                <p><strong>Vigtige ændringer</strong> vil blive kommunikeret via in-app notifikation.</p>
+            </section>
+
+            <section id="kontakt">
+                <h2>📧 Kontakt Os</h2>
+                <p>Har du spørgsmål om denne privatlivspolitik eller dine data?</p>
+
+                <div class="contact-card">
+                    <h3>Kontaktinformation</h3>
+                    <p><strong>Email:</strong> <a href="mailto:Nicki.Andersen@gmail.com">Nicki.Andersen@gmail.com</a></p>
+                    <p><strong>Responstid:</strong> Inden for 48 timer</p>
+                    <p><strong>Udvikler:</strong> Nicki Andersen</p>
+                </div>
+
+                <h3>Brugerrettigheder Anmodninger</h3>
+                <p>For at udøve dine GDPR rettigheder, send en email til <a href="mailto:Nicki.Andersen@gmail.com">Nicki.Andersen@gmail.com</a> med:</p>
+                <ul>
+                    <li>Beskrivelse af din anmodning (f.eks. sletning af licens-data)</li>
+                    <li>Din virksomhedslicens-kode (hvis relevant)</li>
+                    <li>Vi vil svare inden for 30 dage</li>
+                </ul>
+
+                <h3>Klager</h3>
+                <p>Hvis du er utilfreds med vores databehandling, har du ret til at indgive en klage til:</p>
+                
+                <div class="info-box">
+                    <p><strong>Datatilsynet</strong> (Danmark)</p>
+                    <p><strong>Email:</strong> <a href="mailto:dt@datatilsynet.dk">dt@datatilsynet.dk</a></p>
+                    <p><strong>Website:</strong> <a href="https://www.datatilsynet.dk" target="_blank">https://www.datatilsynet.dk</a></p>
+                    <p><strong>Telefon:</strong> +45 33 19 32 00</p>
+                    <p style="margin-top: 10px;">Eller din lokale databeskyttelsesmyndighed i EU.</p>
+                </div>
+            </section>
+
+            <div class="summary">
+                <h2>📌 Resumé (TL;DR)</h2>
+                <ul>
+                    <li>Alt er lokalt – ingen automatisk cloud-upload</li>
+                    <li>Vi indsamler IKKE personlige oplysninger (bortset fra dit frivillige navn)</li>
+                    <li>Ingen analytics, tracking eller reklamer</li>
+                    <li>Supabase bruges kun til at verificere virksomhedslicenser</li>
+                    <li>Google Drive backup er 100% valgfri</li>
+                    <li>Dine arbejdsbilleder er adskilt fra dine private fotos</li>
+                    <li>Du har fuld kontrol – slet når som helst</li>
+                    <li>Fuld GDPR compliance</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Version:</strong> 1.0</p>
+            <p><strong>Gyldig fra:</strong> 12. februar 2026</p>
+            <p><strong>Sprog:</strong> Dansk</p>
+            <p><strong>Jurisdiktion:</strong> Danmark / EU</p>
+            <p style="margin-top: 20px;">© 2026 Worksnap - Udviklet af Nicki Andersen</p>
+        </div>
     </div>
-
-    <h2>1. Lokal datalagring (Billeder og Projekter)</h2>
-    <p>Alle billeder taget med Worksnap og alle projektdata (navne, kommentarer, tags) gemmes udelukkende i appens private lager på din telefon. Vi har ikke adgang til dine billeder, og de uploades aldrig til vores servere. Dine data forlader kun din enhed, hvis du selv vælger at eksportere dem som PDF eller ZIP, eller hvis du aktiverer den valgfrie cloud-backup.</p>
-
-    <h2>2. Licensverificering (Supabase)</h2>
-    <p>Hvis du benytter en virksomhedskode til at aktivere Premium-funktioner, kommunikerer appen med vores backend hos Supabase. I denne forbindelse behandles følgende:</p>
-    <ul>
-        <li><strong>Licenskode:</strong> Den kode du indtaster.</li>
-        <li><strong>Enheds-identifikation:</strong> Et unikt ID fra din enhed for at sikre, at licensen bruges i overensstemmelse med aftalen.</li>
-    </ul>
-    <p>Denne data bruges udelukkende til teknisk administration af din adgang til Premium-funktioner og kobles ikke til dine private billeder eller projekter.</p>
-
-    <h2>3. Valgfri Cloud-backup (Google Drive)</h2>
-    <p>Worksnap tilbyder en valgfri funktion til at sikkerhedskopiere dine data til din egen Google Drive-konto. Hvis du vælger at bruge denne funktion:</p>
-    <ul>
-        <li><strong>Autentificering:</strong> Vi bruger Google OAuth til at lade dig logge ind direkte hos Google. Vi ser eller gemmer aldrig din adgangskode.</li>
-        <li><strong>Dataoverførsel:</strong> Dine billeder og projektdata uploades direkte fra din enhed til din egen private Google Drive.</li>
-        <li><strong>Adgang:</strong> Vi har kun adgang til de mapper og filer, som appen selv opretter på din Google Drive.</li>
-    </ul>
-
-    <h2>4. Ingen tredjeparts-deling</h2>
-    <p>Vi sælger eller deler ikke dine oplysninger med tredjeparter til markedsføringsformål. Der er ingen analytics-værktøjer eller reklame-trackere i appen, der overvåger din adfærd.</p>
-
-    <h2>5. Enhedstilladelser</h2>
-    <p>For at fungere korrekt beder Worksnap om følgende tilladelser:</p>
-    <ul>
-        <li><strong>Kamera:</strong> Bruges til at tage arbejdsbilleder direkte i appen.</li>
-        <li><strong>Lager (Storage):</strong> Bruges til at gemme dine projekter og billeder lokalt samt til at generere rapporter.</li>
-        <li><strong>Internet:</strong> Bruges til verificering af virksomhedslicenser samt valgfri cloud-backup.</li>
-    </ul>
-
-    <h2>5. Datasletning</h2>
-    <p>Når du sletter data i appen, fjernes det permanent fra din enhed. Ved afinstallation af appen slettes alle lokale data automatisk. Licensoplysninger i vores backend kan slettes ved at kontakte os eller fjerne virksomhedskoden i appen.</p>
-
-    <h2>6. Kontakt</h2>
-    <p>Har du spørgsmål til vores behandling af data, er du velkommen til at kontakte os.</p>
-
-    <footer>
-        &copy; 2026 Worksnap - Professionel Billeddokumentation
-    </footer>
 </body>
 </html>
